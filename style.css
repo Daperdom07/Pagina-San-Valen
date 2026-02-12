@@ -93,11 +93,20 @@ body {
     z-index: 1;
 }
 
-/* Escena del yorkie */
+ /* Escena del yorkie (ahora dachshund) */
 #yorkieScene {
     background: linear-gradient(180deg, #87ceeb 0%, #98d8c8 100%);
 }
 
+/* Orden de capas con z-index */
+#heartCanvas { z-index: 1; }   /* fondo de corazones */
+.clouds { z-index: 2; }        /* nubes */
+.ground { z-index: 3; }        /* suelo */
+.paw { z-index: 4; }           /* huellas */
+.love-sign { z-index: 5; }     /* cartel flotante */
+.yorkie-wrapper { z-index: 10; } /* perro siempre al frente */
+
+/* Contenedor del juego */
 .game-container {
     position: relative;
     width: 100%;
@@ -105,141 +114,120 @@ body {
     overflow: hidden;
 }
 
+/* Perro salchicha */
 .yorkie-wrapper {
     position: absolute;
-    bottom: 150px;
-    left: -200px;
-    width: 200px;
-    height: 200px;
+    bottom: 120px;
+    left: -250px;
+    width: 250px;
+    height: 120px;
 }
 
 .yorkie {
-    width: 120px;
-    height: 100px;
+    width: 180px;
+    height: 80px;
     position: relative;
     animation: run 0.4s steps(4) infinite;
+    z-index: 11; /* aún más alto dentro del wrapper */
 }
 
-/* Cuerpo del yorkie */
+/* Cuerpo alargado */
 .yorkie::before {
     content: '';
     position: absolute;
-    width: 60px;
-    height: 45px;
-    background: #D4A574;
-    border: 2px solid #8B6F47;
-    border-radius: 8px;
-    top: 35px;
-    left: 25px;
-    box-shadow: inset -2px -2px 0 #8B6F47;
+    width: 120px;
+    height: 40px;
+    background: #A0522D;
+    border: 2px solid #5C3317;
+    border-radius: 20px;
+    top: 25px;
+    left: 30px;
+    box-shadow: inset -2px -2px 0 #5C3317;
 }
 
 /* Cabeza */
 .yorkie::after {
     content: '';
     position: absolute;
-    width: 40px;
-    height: 35px;
-    background: #D4A574;
-    border: 2px solid #8B6F47;
+    width: 35px;
+    height: 30px;
+    background: #A0522D;
+    border: 2px solid #5C3317;
     border-radius: 50% 50% 40% 40%;
     top: 20px;
-    left: 15px;
-    box-shadow: inset -2px -2px 0 #8B6F47;
+    left: 0px;
+    box-shadow: inset -2px -2px 0 #5C3317;
 }
 
-/* Ojos y nariz usando elementos adicionales */
+/* Ojos y nariz */
 .yorkie .eye {
     position: absolute;
     width: 4px;
     height: 4px;
     background: #000;
     border-radius: 50%;
-    top: 32px;
-    z-index: 2;
+    top: 28px;
+    z-index: 12;
 }
-
-.yorkie .eye.left {
-    left: 28px;
-}
-
-.yorkie .eye.right {
-    left: 38px;
-}
+.yorkie .eye.left { left: 8px; }
+.yorkie .eye.right { left: 16px; }
 
 .yorkie .nose {
     position: absolute;
     width: 6px;
     height: 5px;
     background: #000;
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    top: 38px;
-    left: 31px;
-    z-index: 2;
+    border-radius: 50%;
+    top: 34px;
+    left: 12px;
+    z-index: 12;
 }
 
-/* Orejas */
+/* Orejas largas y caídas */
 .yorkie .ear {
     position: absolute;
-    width: 15px;
-    height: 20px;
-    background: #D4A574;
-    border: 2px solid #8B6F47;
+    width: 12px;
+    height: 25px;
+    background: #A0522D;
+    border: 2px solid #5C3317;
     border-radius: 50% 50% 0 0;
-    top: 15px;
-    z-index: 1;
+    top: 10px;
+    z-index: 11;
 }
+.yorkie .ear.left { left: -2px; transform: rotate(-10deg); }
+.yorkie .ear.right { left: 22px; transform: rotate(10deg); }
 
-.yorkie .ear.left {
-    left: 8px;
-    transform: rotate(-20deg);
-}
-
-.yorkie .ear.right {
-    left: 50px;
-    transform: rotate(20deg);
-}
-
-/* Patas */
+/* Patas cortas */
 .yorkie .leg {
     position: absolute;
     width: 10px;
-    height: 25px;
-    background: #D4A574;
-    border: 2px solid #8B6F47;
+    height: 15px;
+    background: #A0522D;
+    border: 2px solid #5C3317;
     border-radius: 5px;
     bottom: 0;
+    z-index: 11;
 }
-
-.yorkie .leg.front-left {
-    left: 20px;
-}
-
-.yorkie .leg.front-right {
-    left: 35px;
-}
-
-.yorkie .leg.back-left {
-    left: 55px;
-}
-
-.yorkie .leg.back-right {
-    left: 70px;
-}
+.yorkie .leg.front-left { left: 40px; }
+.yorkie .leg.front-right { left: 60px; }
+.yorkie .leg.back-left { left: 100px; }
+.yorkie .leg.back-right { left: 120px; }
 
 /* Cola */
 .yorkie .tail {
     position: absolute;
-    width: 8px;
-    height: 25px;
-    background: #D4A574;
-    border: 2px solid #8B6F47;
-    border-radius: 0 0 5px 5px;
-    bottom: 15px;
-    right: -5px;
-    transform: rotate(-10deg);
+    width: 6px;
+    height: 20px;
+    background: #A0522D;
+    border: 2px solid #5C3317;
+    border-radius: 5px;
+    bottom: 20px;
+    right: -10px;
+    transform: rotate(30deg);
+    z-index: 11;
 }
 
+/* Animación de correr */
 @keyframes run {
     0% { transform: translateY(0) scaleX(1); }
     25% { transform: translateY(-5px) scaleX(1); }
@@ -248,23 +236,6 @@ body {
     100% { transform: translateY(0) scaleX(1); }
 }
 
-.ground {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background: 
-        repeating-linear-gradient(
-            90deg,
-            #8B7355 0px,
-            #8B7355 20px,
-            #A0826D 20px,
-            #A0826D 40px
-        );
-    border-top: 4px solid #6B5D4F;
-    animation: groundMove 0.5s linear infinite;
-}
 
 @keyframes groundMove {
     0% { background-position: 0 0; }
@@ -606,5 +577,40 @@ body {
     
     .buttons-container {
         flex-direction: column;
+    }
+}
+
+.sparkle {
+    position: relative;
+    color: red;
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    0% {
+        text-shadow: 0 0 5px #ff0000;
+    }
+    50% {
+        text-shadow: 0 0 20px #ff4d4d, 0 0 30px #ff0000;
+    }
+    100% {
+        text-shadow: 0 0 5px #ff0000;
+    }
+}
+
+
+.falling-sparkle {
+    position: fixed;
+    top: -20px;
+    font-size: 20px;
+    pointer-events: none;
+    animation: sparkleFall linear forwards;
+    z-index: 9999;
+}
+
+@keyframes sparkleFall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
     }
 }

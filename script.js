@@ -169,6 +169,7 @@ function transitionToYorkie() {
     currentScreen = 'yorkieScene';
     switchScreen('heartRain', 'yorkieScene');
     startHeartRain("yorkieScene");
+    createSparkleRain();
     // Animar yorkie corriendo
     animateYorkie();
     
@@ -178,7 +179,25 @@ function transitionToYorkie() {
 function animateYorkie() {
     const yorkie = document.getElementById('yorkie');
     const yorkieWrapper = document.querySelector('.yorkie-wrapper');
-    
+    setInterval(() => {
+        const paw = document.createElement("div");
+        paw.classList.add("paw");
+        paw.innerText = "🐾";
+
+        const rect = yorkieWrapper.getBoundingClientRect();
+
+        paw.style.left = rect.left + "px";
+        paw.style.top = (rect.bottom - 20) + "px";
+
+        document.body.appendChild(paw);
+
+        setTimeout(() => {
+            paw.remove();
+        }, 3000);
+
+    }, 300);
+
+
     function moveYorkie() {
         yorkiePosition += 5;
         yorkieWrapper.style.left = yorkiePosition + 'px';
@@ -228,6 +247,8 @@ function transitionToQuestion() {
     currentScreen = 'questionScreen';
     switchScreen('yorkieScene', 'questionScreen');
     createParticles();
+    startHeartRain("questionScreen");
+    
     
     // Asegurar que los botones tengan posición inicial correcta
     const noBtn = document.getElementById('noBtn');
@@ -434,6 +455,8 @@ function handleYesClick() {
         transitionToSuccess();
     }, 500);
     startHeartRain("successScreen");
+    createSparkleRain();
+    startHeartRain("yorkieScene");
 }
 
 // Crear partículas de celebración
@@ -597,3 +620,22 @@ function startHeartRain(containerId) {
 
     return interval;
 }
+
+function createSparkleRain() {
+    setInterval(() => {
+        const sparkle = document.createElement("div");
+        sparkle.classList.add("falling-sparkle");
+        sparkle.innerText = "✨";
+
+        sparkle.style.left = Math.random() * window.innerWidth + "px";
+        sparkle.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => {
+            sparkle.remove();
+        }, 5000);
+
+    }, 300);
+}
+
