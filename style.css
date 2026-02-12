@@ -531,6 +531,20 @@ body {
     font-size: 3rem;
 }
 
+.falling-heart {
+    position: absolute;
+    top: -30px;
+    animation: fall 4s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
 .heart-emoji {
     display: inline-block;
     animation: float 2s ease-in-out infinite;
@@ -594,4 +608,3 @@ body {
         flex-direction: column;
     }
 }
-

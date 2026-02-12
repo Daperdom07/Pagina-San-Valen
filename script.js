@@ -168,9 +168,10 @@ function transitionToYorkie() {
     
     currentScreen = 'yorkieScene';
     switchScreen('heartRain', 'yorkieScene');
-    
+    startHeartRain("yorkieScene");
     // Animar yorkie corriendo
     animateYorkie();
+    
 }
 
 // Animar yorkie
@@ -432,6 +433,7 @@ function handleYesClick() {
     setTimeout(() => {
         transitionToSuccess();
     }, 500);
+    startHeartRain("successScreen");
 }
 
 // Crear partículas de celebración
@@ -573,3 +575,25 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+
+function startHeartRain(containerId) {
+    const container = document.getElementById(containerId);
+
+    const interval = setInterval(() => {
+        const heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.classList.add("falling-heart");
+
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+
+        container.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 4000);
+
+    }, 300);
+
+    return interval;
+}
